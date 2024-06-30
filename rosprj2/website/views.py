@@ -34,3 +34,9 @@ def delete_url():
             db.session.commit()
 
     return jsonify({})
+
+@views.route('/fetch_approved_urls', methods=['GET'])
+def fetch_approved_urls():
+    all_urls = sURL.query.all()  # Fetch all records from the sURL model
+    url_list = [url.data for url in all_urls]  # Extract the URL from each record
+    return jsonify(url_list)  # Return the list of URLs as JSON
